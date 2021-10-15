@@ -1,0 +1,83 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="stress_test.list">
+      <field name="name">Stress Test List</field>
+      <field name="model">stress_test.stress_test</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+          <field name="test_one"/>
+          <field name="test_two"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="stress_test.form">
+      <field name="name">Stress Test Form</field>
+      <field name="model">stress_test.stress_test</field>
+      <field name="arch" type="xml">
+        <form string="Test">
+          <header>
+            <button name="stress_test_one" string="Test one" type="object" class="oe_highlight"/>
+            <button name="stress_test_two" string="Test two" type="object" class="oe_highlight"/>
+            <button name="run_both_tests_in_order" string="In Order" type="object"/>
+            <button name="run_both_tests_reverse_order" string="Reverse Order" type="object"/>
+          </header>
+          <group>
+            <field name="name"/>
+          </group>
+<!--          <field name="value"/>-->
+<!--          <field name="value2"/>-->
+          <group>
+            <field name="test_one"/>
+            <field name="test_two"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="stress_test.action_window">
+      <field name="name">Stress Test</field>
+      <field name="res_model">stress_test.stress_test</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="stress_test.action_server">
+      <field name="name">stress_test server</field>
+      <field name="model_id" ref="model_stress_test_stress_test"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+    <menuitem name="Stress Test" id="stress_test.menu_root" sequence="-1"/>
+    <!-- menu categories -->
+
+    <menuitem name="Menu 1" id="stress_test.menu_1" parent="stress_test.menu_root"/>
+<!--
+    <menuitem name="Menu 2" id="stress_test.menu_2" parent="stress_test.menu_root"/>
+-->
+    <!-- actions -->
+
+    <menuitem name="List" id="stress_test.menu_1_list" parent="stress_test.menu_1"
+              action="stress_test.action_window"/>
+<!--
+    <menuitem name="Server to list" id="stress_test" parent="stress_test.menu_2"
+              action="stress_test.action_server"/>
+-->
+  </data>
+</odoo>
